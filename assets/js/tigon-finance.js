@@ -19,12 +19,9 @@
             var tabs   = box.querySelectorAll('.tigon-finance-tab');
             var panels = box.querySelectorAll('.tigon-finance-panel');
 
-            // Tab switching – prevent the tab click from following the outer link.
+            // Tab switching.
             tabs.forEach(function (tab) {
                 tab.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
                     var tabId = this.getAttribute('data-tab');
 
                     tabs.forEach(function (t) { t.classList.remove('active'); });

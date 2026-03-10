@@ -7,7 +7,6 @@
 
 .tigon-finance-box {
     max-width: 960px;
-    max-height: 540px;
     width: 100%;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -18,21 +17,7 @@
     background: linear-gradient(165deg, #eaf4fb 0%, #dcedf8 100%);
     box-shadow: 0 4px 20px rgba(3, 68, 116, 0.15);
     margin: 20px auto;
-    cursor: pointer;
     position: relative;
-}
-
-/* The entire box is wrapped in this link */
-.tigon-finance-box-link {
-    display: block;
-    text-decoration: none !important;
-    color: inherit !important;
-}
-
-.tigon-finance-box-link:hover,
-.tigon-finance-box-link:focus {
-    text-decoration: none !important;
-    color: inherit !important;
 }
 
 /* ---------- Header Bar ---------- */
@@ -90,7 +75,7 @@
 .tigon-finance-panels {
     padding: 24px 20px 16px;
     text-align: center;
-    min-height: 180px;
+    min-height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -121,7 +106,7 @@
     font-weight: 600;
 }
 
-/* Big price – stays GREEN */
+/* Big price – GREEN */
 .tigon-finance-amount {
     margin: 0 0 8px;
     line-height: 1;
@@ -150,14 +135,19 @@
 /* Detail line */
 .tigon-finance-details {
     font-size: 13px;
-    color: #4a6a80;
+    color: #034474;
     margin: 0;
 }
 
-/* ---------- CTA Button – stays GREEN ---------- */
+/* ---------- CTA Button – GREEN ---------- */
+.tigon-finance-cta-link {
+    display: block;
+    text-decoration: none !important;
+    margin: 0 20px 16px;
+}
+
 .tigon-finance-cta {
     display: block;
-    margin: 0 20px 20px;
     padding: 14px 24px;
     background: linear-gradient(135deg, #28a745 0%, #1a7a3a 100%);
     color: #ffffff !important;
@@ -171,44 +161,37 @@
     box-shadow: 0 4px 14px rgba(40, 167, 69, 0.35);
 }
 
-.tigon-finance-box-link:hover .tigon-finance-cta {
+.tigon-finance-cta-link:hover .tigon-finance-cta {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(40, 167, 69, 0.5);
     color: #ffffff !important;
 }
 
-.tigon-finance-box-link:active .tigon-finance-cta {
+.tigon-finance-cta-link:active .tigon-finance-cta {
     transform: translateY(0);
 }
 
 /* ---------- Disclaimer ---------- */
 .tigon-finance-disclaimer {
-    font-size: 11px;
+    font-size: 9px;
+    line-height: 1.4;
     color: #034474;
     background: #dcedf8;
     border-top: 1px solid #a3c8e0;
     text-align: center;
     margin: 0;
     padding: 8px 20px;
-    font-style: italic;
 }
 
 .tigon-finance-disclaimer-used {
-    border-bottom: none;
+    font-style: italic;
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 600px) {
-    .tigon-finance-value {
-        font-size: 42px;
-    }
-
-    .tigon-finance-currency {
-        font-size: 22px;
-    }
-
-    .tigon-finance-per {
-        font-size: 18px;
+    .tigon-finance-box {
+        border-radius: 8px;
+        margin: 10px auto;
     }
 
     .tigon-finance-header {
@@ -221,14 +204,71 @@
         padding: 10px 6px;
     }
 
+    .tigon-finance-panels {
+        min-height: 120px;
+        padding: 16px 14px 12px;
+    }
+
+    .tigon-finance-as-low {
+        font-size: 12px;
+    }
+
+    .tigon-finance-value {
+        font-size: 40px;
+    }
+
+    .tigon-finance-currency {
+        font-size: 20px;
+    }
+
+    .tigon-finance-per {
+        font-size: 16px;
+    }
+
+    .tigon-finance-details {
+        font-size: 11px;
+    }
+
+    .tigon-finance-cta-link {
+        margin: 0 14px 12px;
+    }
+
     .tigon-finance-cta {
         font-size: 15px;
-        margin: 0 14px 14px;
         padding: 12px 18px;
     }
 
-    .tigon-finance-panels {
-        min-height: 150px;
-        padding: 18px 14px 12px;
+    .tigon-finance-disclaimer {
+        font-size: 8px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tigon-finance-header {
+        font-size: 13px;
+        padding: 10px 10px;
+    }
+
+    .tigon-finance-tab {
+        font-size: 11px;
+        padding: 8px 4px;
+    }
+
+    .tigon-finance-value {
+        font-size: 32px;
+    }
+
+    .tigon-finance-currency {
+        font-size: 16px;
+    }
+
+    .tigon-finance-per {
+        font-size: 14px;
+    }
+
+    .tigon-finance-cta {
+        font-size: 13px;
+        padding: 10px 14px;
     }
 }
