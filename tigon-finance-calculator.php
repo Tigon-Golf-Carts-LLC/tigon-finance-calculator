@@ -3,7 +3,7 @@
  * Plugin Name: TIGON Financing Calculator
  * Plugin URI:  https://tigongolfcarts.com
  * Description: The TIGON enterprise WordPress plugin that bridges ZERO Percent Financing Option with WooCommerce — automatically syncing inventory pricing with monthly payments using product data in real time.
- * Version:     2.0.0
+ * Version:     2.2.0
  * Author:      Noah Jaslow & Jaslow Digital
  * Author URI:  https://jaslowdigital.com
  * License:     Proprietary
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'TIGON_FINANCE_VERSION', '2.0.0' );
+define( 'TIGON_FINANCE_VERSION', '2.2.0' );
 define( 'TIGON_FINANCE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TIGON_FINANCE_URL', plugin_dir_url( __FILE__ ) );
 

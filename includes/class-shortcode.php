@@ -79,16 +79,10 @@ function tigon_finance_shortcode( $atts ) {
          data-apply-url="<?php echo $apply_url; ?>"
          data-manufacturer="<?php echo esc_attr( $manufacturer ); ?>"
          data-best-fee="<?php echo esc_attr( $fee_rate ); ?>">
-        <a href="<?php echo $apply_url; ?>" target="_blank" rel="noopener noreferrer" class="tigon-finance-box-link" aria-label="Apply for financing">
+
         <div class="tigon-finance-header">
             <span class="tigon-finance-header-icon">&#9733;</span>
-            <span class="tigon-finance-header-text">
-                <?php if ( $mfr_display ) : ?>
-                    <?php echo esc_html( $mfr_display ); ?> — Financing Available
-                <?php else : ?>
-                    Financing Available
-                <?php endif; ?>
-            </span>
+            <span class="tigon-finance-header-text">0% Financing Available</span>
         </div>
 
         <div class="tigon-finance-tabs">
@@ -118,14 +112,15 @@ function tigon_finance_shortcode( $atts ) {
             </div>
         </div>
 
-        <span class="tigon-finance-cta">
-            <?php echo esc_html( $atts['label'] ); ?>
-        </span>
+        <a href="<?php echo $apply_url; ?>" target="_blank" rel="noopener noreferrer" class="tigon-finance-cta-link" aria-label="Apply for financing">
+            <span class="tigon-finance-cta">
+                <?php echo esc_html( $atts['label'] ); ?>
+            </span>
+        </a>
         <?php if ( 'used' === $manufacturer ) : ?>
             <p class="tigon-finance-disclaimer tigon-finance-disclaimer-used">* 0% financing is only available on vehicles 2016 or newer.</p>
         <?php endif; ?>
         <p class="tigon-finance-disclaimer"><strong>Promo rates available as low as 0% up to 48 Months.</strong> All Financing options are subject to credit approval. Terms, Rates, and Conditions may vary based on the Applicant's credit profile, and lender requirements. Additional fees may apply.</p>
-        </a>
     </div>
     <?php
     return ob_get_clean();
