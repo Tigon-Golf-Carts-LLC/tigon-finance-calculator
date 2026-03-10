@@ -121,6 +121,9 @@ function tigon_finance_shortcode( $atts ) {
         <span class="tigon-finance-cta">
             <?php echo esc_html( $atts['label'] ); ?>
         </span>
+        <?php if ( 'used' === $manufacturer ) : ?>
+            <p class="tigon-finance-disclaimer">* 0% financing is only available on vehicles 2016 or newer.</p>
+        <?php endif; ?>
         </a>
     </div>
     <?php

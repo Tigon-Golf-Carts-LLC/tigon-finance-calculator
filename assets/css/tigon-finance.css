@@ -181,6 +181,18 @@
     transform: translateY(0);
 }
 
+/* ---------- Disclaimer ---------- */
+.tigon-finance-disclaimer {
+    font-size: 11px;
+    color: #856404;
+    background: #fff3cd;
+    border-top: 1px solid #ffc107;
+    text-align: center;
+    margin: 0;
+    padding: 8px 20px;
+    font-style: italic;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 600px) {
     .tigon-finance-value {
