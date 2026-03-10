@@ -87,7 +87,7 @@
             var lowestDetails = lowestPanel.querySelector('.tigon-finance-details');
 
             if (lowestValue)   lowestValue.textContent = numberFormat(lowestPayment.toFixed(2));
-            if (lowestDetails) lowestDetails.textContent = 'for ' + LOWEST_MONTHS + ' months \u2022 ' + LOWEST_APR + '% APR \u2022 ' + symbol + numberFormat(lowestTotal.toFixed(2)) + ' total';
+            if (lowestDetails) lowestDetails.textContent = 'for ' + LOWEST_MONTHS + ' months';
         }
 
         // BEST DEAL panel: 36 months, 0% APR + fee (per-widget override via data-best-fee).
@@ -101,7 +101,7 @@
             var bestDetails = bestPanel.querySelector('.tigon-finance-details');
 
             if (bestValue)   bestValue.textContent = numberFormat(bestPayment.toFixed(2));
-            if (bestDetails) bestDetails.textContent = 'for ' + BEST_MONTHS + ' months \u2022 0% APR + ' + bestFeePct + '% fee \u2022 ' + symbol + numberFormat(bestTotal.toFixed(2)) + ' total';
+            if (bestDetails) bestDetails.textContent = 'for ' + BEST_MONTHS + ' months \u2022 0% APR';
         }
     }
 

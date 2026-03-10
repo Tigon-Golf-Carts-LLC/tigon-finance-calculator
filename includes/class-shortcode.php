@@ -98,7 +98,7 @@ function tigon_finance_shortcode( $atts ) {
                     <span class="tigon-finance-value"><?php echo esc_html( number_format( $lowest_payment, 2 ) ); ?></span>
                     <span class="tigon-finance-per">/mo</span>
                 </p>
-                <p class="tigon-finance-details">for <?php echo $num_payments_low; ?> months &bull; <?php echo esc_html( $annual_rate ); ?>% APR &bull; <?php echo esc_html( $currency_symbol . number_format( $lowest_total, 2 ) ); ?> total</p>
+                <p class="tigon-finance-details">for <?php echo $num_payments_low; ?> months</p>
             </div>
 
             <div class="tigon-finance-panel" data-tab="best">
@@ -108,7 +108,7 @@ function tigon_finance_shortcode( $atts ) {
                     <span class="tigon-finance-value"><?php echo esc_html( number_format( $best_payment, 2 ) ); ?></span>
                     <span class="tigon-finance-per">/mo</span>
                 </p>
-                <p class="tigon-finance-details">for <?php echo $num_payments_best; ?> months &bull; 0% APR + <?php echo esc_html( $fee_rate ); ?>% fee &bull; <?php echo esc_html( $currency_symbol . number_format( $best_total, 2 ) ); ?> total</p>
+                <p class="tigon-finance-details">for <?php echo $num_payments_best; ?> months &bull; 0% APR</p>
             </div>
         </div>
 
