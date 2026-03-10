@@ -122,8 +122,9 @@ function tigon_finance_shortcode( $atts ) {
             <?php echo esc_html( $atts['label'] ); ?>
         </span>
         <?php if ( 'used' === $manufacturer ) : ?>
-            <p class="tigon-finance-disclaimer">* 0% financing is only available on vehicles 2016 or newer.</p>
+            <p class="tigon-finance-disclaimer tigon-finance-disclaimer-used">* 0% financing is only available on vehicles 2016 or newer.</p>
         <?php endif; ?>
+        <p class="tigon-finance-disclaimer"><strong>Promo rates available as low as 0% up to 48 Months.</strong> All Financing options are subject to credit approval. Terms, Rates, and Conditions may vary based on the Applicant's credit profile, and lender requirements. Additional fees may apply.</p>
         </a>
     </div>
     <?php
