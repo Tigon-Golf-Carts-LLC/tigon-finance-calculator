@@ -51,20 +51,20 @@
     text-align: center;
     cursor: pointer;
     border: none;
-    background: transparent;
-    color: #034474;
+    background: #034474;
+    color: #ffffff;
     transition: background 0.25s, color 0.25s;
     position: relative;
 }
 
 .tigon-finance-tab:hover {
-    background: #b0d2e8;
+    background: #022d4f;
 }
 
 .tigon-finance-tab.active {
-    background: #ffffff;
-    color: #034474;
-    border-bottom: 3px solid #034474;
+    background: #c0392b;
+    color: #ffffff;
+    border-bottom: 3px solid #a93226;
 }
 
 .tigon-finance-tab + .tigon-finance-tab {
