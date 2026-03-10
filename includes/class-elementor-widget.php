@@ -21,9 +21,9 @@ class Tigon_Finance_Elementor_Widget extends \Elementor\Widget_Base {
 
     public function get_title() {
         if ( $this->manufacturer_label ) {
-            return __( 'TIGON Finance — ' . $this->manufacturer_label, 'tigon-finance' );
+            return __( $this->manufacturer_label . ' Financing', 'tigon-finance' );
         }
-        return __( 'TIGON Finance Calculator', 'tigon-finance' );
+        return __( 'TIGON Financing Calculator', 'tigon-finance' );
     }
 
     public function get_icon() {
