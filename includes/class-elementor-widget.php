@@ -73,6 +73,247 @@ class Tigon_Finance_Elementor_Widget extends \Elementor\Widget_Base {
         ] );
 
         $this->end_controls_section();
+
+        /* --------------------------------------------------------
+         * STYLE TAB – Box
+         * ------------------------------------------------------ */
+        $this->start_controls_section( 'style_box', [
+            'label' => __( 'Box', 'tigon-finance' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+        ] );
+
+        $this->add_control( 'box_border_color', [
+            'label'     => __( 'Border Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-box' => 'border-color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'box_bg_color', [
+            'label'     => __( 'Background Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-box' => 'background: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'box_border_radius', [
+            'label'      => __( 'Border Radius', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%' ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-box' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'box_padding', [
+            'label'      => __( 'Padding', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', 'em' ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->end_controls_section();
+
+        /* --------------------------------------------------------
+         * STYLE TAB – Header
+         * ------------------------------------------------------ */
+        $this->start_controls_section( 'style_header', [
+            'label' => __( 'Header', 'tigon-finance' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+        ] );
+
+        $this->add_control( 'header_bg_color', [
+            'label'     => __( 'Background Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-header' => 'background: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'header_text_color', [
+            'label'     => __( 'Text Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-header' => 'color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_group_control( \Elementor\Group_Control_Typography::get_type(), [
+            'name'     => 'header_typography',
+            'selector' => '{{WRAPPER}} .tigon-finance-header',
+        ] );
+
+        $this->end_controls_section();
+
+        /* --------------------------------------------------------
+         * STYLE TAB – Tabs
+         * ------------------------------------------------------ */
+        $this->start_controls_section( 'style_tabs', [
+            'label' => __( 'Tabs', 'tigon-finance' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+        ] );
+
+        $this->add_control( 'tabs_bg_color', [
+            'label'     => __( 'Background Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-tabs' => 'background: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'tabs_text_color', [
+            'label'     => __( 'Text Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-tab' => 'color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'tabs_active_bg_color', [
+            'label'     => __( 'Active Tab Background', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-tab.active' => 'background: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'tabs_active_border_color', [
+            'label'     => __( 'Active Tab Border Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-tab.active' => 'border-bottom-color: {{VALUE}};',
+                '{{WRAPPER}} .tigon-finance-tabs'       => 'border-bottom-color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_group_control( \Elementor\Group_Control_Typography::get_type(), [
+            'name'     => 'tabs_typography',
+            'selector' => '{{WRAPPER}} .tigon-finance-tab',
+        ] );
+
+        $this->end_controls_section();
+
+        /* --------------------------------------------------------
+         * STYLE TAB – Price Display
+         * ------------------------------------------------------ */
+        $this->start_controls_section( 'style_price', [
+            'label' => __( 'Price', 'tigon-finance' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+        ] );
+
+        $this->add_control( 'price_color', [
+            'label'     => __( 'Price Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-amount' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .tigon-finance-per'    => 'color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'label_color', [
+            'label'     => __( 'Label Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-as-low'   => 'color: {{VALUE}};',
+                '{{WRAPPER}} .tigon-finance-details'  => 'color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'price_size', [
+            'label'      => __( 'Price Font Size', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::SLIDER,
+            'size_units' => [ 'px' ],
+            'range'      => [ 'px' => [ 'min' => 24, 'max' => 80 ] ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-value' => 'font-size: {{SIZE}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->end_controls_section();
+
+        /* --------------------------------------------------------
+         * STYLE TAB – CTA Button
+         * ------------------------------------------------------ */
+        $this->start_controls_section( 'style_cta', [
+            'label' => __( 'CTA Button', 'tigon-finance' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+        ] );
+
+        $this->add_control( 'cta_bg_color', [
+            'label'     => __( 'Background Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-cta' => 'background: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'cta_text_color', [
+            'label'     => __( 'Text Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-cta' => 'color: {{VALUE}} !important;',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'cta_border_radius', [
+            'label'      => __( 'Border Radius', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', '%' ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-cta' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'cta_padding', [
+            'label'      => __( 'Padding', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', 'em' ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-cta' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ] );
+
+        $this->add_group_control( \Elementor\Group_Control_Typography::get_type(), [
+            'name'     => 'cta_typography',
+            'selector' => '{{WRAPPER}} .tigon-finance-cta',
+        ] );
+
+        $this->end_controls_section();
+
+        /* --------------------------------------------------------
+         * STYLE TAB – Disclaimer
+         * ------------------------------------------------------ */
+        $this->start_controls_section( 'style_disclaimer', [
+            'label' => __( 'Disclaimer', 'tigon-finance' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+        ] );
+
+        $this->add_control( 'disclaimer_text_color', [
+            'label'     => __( 'Text Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-disclaimer' => 'color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'disclaimer_bg_color', [
+            'label'     => __( 'Background Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-disclaimer' => 'background: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_group_control( \Elementor\Group_Control_Typography::get_type(), [
+            'name'     => 'disclaimer_typography',
+            'selector' => '{{WRAPPER}} .tigon-finance-disclaimer',
+        ] );
+
+        $this->end_controls_section();
     }
 
     protected function render() {
