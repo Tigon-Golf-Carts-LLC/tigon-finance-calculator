@@ -1,5 +1,5 @@
 /* ============================================================
-   TIGON Financing Calculator – Green "money" theme
+   TIGON Financing Calculator – Blue theme with green accents
    Max: 960 x 540 px  |  Designed for placement below Buy Now
    © TIGON Golf Carts – All rights reserved
    Developer: Noah Jaslow © Jaslow Digital — jaslowdigital.com
@@ -12,11 +12,11 @@
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    border: 2px solid #1a7a3a;
+    border: 2px solid #034474;
     border-radius: 12px;
     overflow: hidden;
-    background: linear-gradient(165deg, #f0faf3 0%, #e6f5eb 100%);
-    box-shadow: 0 4px 20px rgba(26, 122, 58, 0.15);
+    background: linear-gradient(165deg, #eaf4fb 0%, #dcedf8 100%);
+    box-shadow: 0 4px 20px rgba(3, 68, 116, 0.15);
     margin: 20px auto;
     cursor: pointer;
     position: relative;
@@ -37,7 +37,7 @@
 
 /* ---------- Header Bar ---------- */
 .tigon-finance-header {
-    background: linear-gradient(135deg, #1a7a3a 0%, #15632f 100%);
+    background: linear-gradient(135deg, #034474 0%, #022d4f 100%);
     color: #ffffff;
     text-align: center;
     padding: 14px 20px;
@@ -54,8 +54,8 @@
 /* ---------- Tabs ---------- */
 .tigon-finance-tabs {
     display: flex;
-    background: #d4edda;
-    border-bottom: 2px solid #1a7a3a;
+    background: #c8dff0;
+    border-bottom: 2px solid #034474;
 }
 
 .tigon-finance-tab {
@@ -67,23 +67,23 @@
     cursor: pointer;
     border: none;
     background: transparent;
-    color: #155724;
+    color: #034474;
     transition: background 0.25s, color 0.25s;
     position: relative;
 }
 
 .tigon-finance-tab:hover {
-    background: #c3e6cb;
+    background: #b0d2e8;
 }
 
 .tigon-finance-tab.active {
     background: #ffffff;
-    color: #1a7a3a;
-    border-bottom: 3px solid #1a7a3a;
+    color: #034474;
+    border-bottom: 3px solid #034474;
 }
 
 .tigon-finance-tab + .tigon-finance-tab {
-    border-left: 1px solid #b1dfbb;
+    border-left: 1px solid #a3c8e0;
 }
 
 /* ---------- Panels ---------- */
@@ -114,14 +114,14 @@
 /* "As low as" label */
 .tigon-finance-as-low {
     font-size: 14px;
-    color: #5a6c5e;
+    color: #034474;
     margin: 0 0 4px;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-weight: 600;
 }
 
-/* Big price */
+/* Big price – stays GREEN */
 .tigon-finance-amount {
     margin: 0 0 8px;
     line-height: 1;
@@ -144,17 +144,17 @@
 .tigon-finance-per {
     font-size: 22px;
     font-weight: 600;
-    color: #2d8a4e;
+    color: #28a745;
 }
 
 /* Detail line */
 .tigon-finance-details {
     font-size: 13px;
-    color: #6c7e6f;
+    color: #4a6a80;
     margin: 0;
 }
 
-/* ---------- CTA Button ---------- */
+/* ---------- CTA Button – stays GREEN ---------- */
 .tigon-finance-cta {
     display: block;
     margin: 0 20px 20px;
@@ -184,13 +184,17 @@
 /* ---------- Disclaimer ---------- */
 .tigon-finance-disclaimer {
     font-size: 11px;
-    color: #856404;
-    background: #fff3cd;
-    border-top: 1px solid #ffc107;
+    color: #034474;
+    background: #dcedf8;
+    border-top: 1px solid #a3c8e0;
     text-align: center;
     margin: 0;
     padding: 8px 20px;
     font-style: italic;
+}
+
+.tigon-finance-disclaimer-used {
+    border-bottom: none;
 }
 
 /* ---------- Responsive ---------- */
