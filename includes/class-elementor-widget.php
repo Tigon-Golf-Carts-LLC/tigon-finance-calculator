@@ -3,14 +3,27 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+/**
+ * Base TIGON Finance Elementor widget.
+ * Manufacturer-specific widgets extend this class.
+ */
 class Tigon_Finance_Elementor_Widget extends \Elementor\Widget_Base {
 
+    protected $manufacturer_slug = '';
+    protected $manufacturer_label = '';
+
     public function get_name() {
+        if ( $this->manufacturer_slug ) {
+            return 'tigon_finance_' . $this->manufacturer_slug;
+        }
         return 'tigon_finance_calculator';
     }
 
     public function get_title() {
-        return __( 'TIGON 0% Finance Calculator', 'tigon-finance' );
+        if ( $this->manufacturer_label ) {
+            return __( $this->manufacturer_label . ' Financing', 'tigon-finance' );
+        }
+        return __( 'TIGON Financing Calculator', 'tigon-finance' );
     }
 
     public function get_icon() {
@@ -22,7 +35,11 @@ class Tigon_Finance_Elementor_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_keywords() {
-        return [ 'finance', 'payment', 'woocommerce', 'monthly', '0%', 'tigon' ];
+        $keywords = [ 'finance', 'payment', 'woocommerce', 'monthly', 'tigon' ];
+        if ( $this->manufacturer_label ) {
+            $keywords[] = strtolower( $this->manufacturer_label );
+        }
+        return $keywords;
     }
 
     protected function register_controls() {
@@ -42,7 +59,7 @@ class Tigon_Finance_Elementor_Widget extends \Elementor\Widget_Base {
         $this->add_control( 'cta_label', [
             'label'   => __( 'CTA Button Text', 'tigon-finance' ),
             'type'    => \Elementor\Controls_Manager::TEXT,
-            'default' => 'Apply for 0% Financing',
+            'default' => 'Apply for Financing',
         ] );
 
         $this->add_control( 'cta_url', [
@@ -75,6 +92,60 @@ class Tigon_Finance_Elementor_Widget extends \Elementor\Widget_Base {
             $shortcode_atts .= ' url="' . esc_attr( $settings['cta_url']['url'] ) . '"';
         }
 
-        echo do_shortcode( '[tigon_finance-calculator' . $shortcode_atts . ']' );
+        if ( $this->manufacturer_slug ) {
+            $shortcode_atts .= ' manufacturer="' . esc_attr( $this->manufacturer_slug ) . '"';
+        }
+
+        echo do_shortcode( '[tigon_finance_calculator' . $shortcode_atts . ']' );
     }
+}
+
+/*
+ * Manufacturer-specific Elementor widgets.
+ * Each extends the base widget with a unique slug and display label.
+ */
+
+class Tigon_Finance_Widget_Denago extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'denago';
+    protected $manufacturer_label = 'Denago';
+}
+
+class Tigon_Finance_Widget_Evolution extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'evolution';
+    protected $manufacturer_label = 'Evolution';
+}
+
+class Tigon_Finance_Widget_Teko extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'teko';
+    protected $manufacturer_label = 'TEKO';
+}
+
+class Tigon_Finance_Widget_Tara extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'tara';
+    protected $manufacturer_label = 'TARA';
+}
+
+class Tigon_Finance_Widget_Atlas extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'atlas';
+    protected $manufacturer_label = 'Atlas';
+}
+
+class Tigon_Finance_Widget_Clubcar extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'clubcar';
+    protected $manufacturer_label = 'Club Car';
+}
+
+class Tigon_Finance_Widget_Ezgo extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'ezgo';
+    protected $manufacturer_label = 'E-Z-GO';
+}
+
+class Tigon_Finance_Widget_Swiftev extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'swiftev';
+    protected $manufacturer_label = 'Swift EV';
+}
+
+class Tigon_Finance_Widget_Used extends Tigon_Finance_Elementor_Widget {
+    protected $manufacturer_slug  = 'used';
+    protected $manufacturer_label = 'Used';
 }

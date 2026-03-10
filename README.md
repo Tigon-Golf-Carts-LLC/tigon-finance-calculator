@@ -11,38 +11,52 @@ The TIGON enterprise WordPress plugin that bridges ZERO Percent Financing Option
 
 ## Description
 
-TIGON Financing Calculator connects your WooCommerce product catalog with a 0% financing option, displaying real-time monthly payment breakdowns (36, 48, and 60 months) directly on product pages. It works as both a WordPress shortcode (`[tigon_finance-calculator]`) and an Elementor widget.
+TIGON Financing Calculator displays two financing options for every WooCommerce product:
 
-### Features
+| Tab | Terms | Details |
+|-----|-------|---------|
+| **Lowest Payment** | 60 months @ 7.99% APR | Standard amortized monthly payment |
+| **Best Deal** | 36 months @ 0% APR + 5.25% fee | Lowest total cost for the buyer |
 
-- **Real-Time Price Sync** — Automatically pulls WooCommerce product prices and calculates monthly payments.
-- **0% APR Financing Display** — Shows customers their monthly cost across 36, 48, and 60-month terms.
-- **Shortcode Support** — Use `[tigon_finance-calculator]` anywhere in WordPress with optional `price`, `label`, and `url` attributes.
-- **Elementor Widget** — Drag-and-drop TIGON 0% Finance Calculator widget with built-in controls.
-- **Custom Price Override** — Optionally set a manual price instead of using the WooCommerce product price.
-- **Configurable CTA** — Customize the financing application button text and URL.
+Prices sync in real time from WooCommerce product data, including variable product support.
+
+### Manufacturer Widgets
+
+The plugin ships with dedicated widgets for each manufacturer brand. Each is available as both a **WordPress shortcode** and an **Elementor widget**:
+
+| Manufacturer | Shortcode | Elementor Widget |
+|-------------|-----------|-----------------|
+| Denago | `[tigon_finance_denago]` | TIGON Finance — Denago |
+| Evolution | `[tigon_finance_evolution]` | TIGON Finance — Evolution |
+| TEKO | `[tigon_finance_teko]` | TIGON Finance — TEKO |
+| TARA | `[tigon_finance_tara]` | TIGON Finance — TARA |
+| Atlas | `[tigon_finance_atlas]` | TIGON Finance — Atlas |
+| Club Car | `[tigon_finance_clubcar]` | TIGON Finance — Club Car |
+| E-Z-GO | `[tigon_finance_ezgo]` | TIGON Finance — E-Z-GO |
+| Swift EV | `[tigon_finance_swiftev]` | TIGON Finance — Swift EV |
+| Used | `[tigon_finance_used]` | TIGON Finance — Used |
+
+A generic (unbranded) widget is also available:
+
+- Shortcode: `[tigon_finance_calculator]`
+- Elementor: **TIGON Finance Calculator**
+
+### Shortcode Attributes
+
+All shortcodes accept the same optional attributes:
+
+| Attribute | Default | Description |
+|-----------|---------|-------------|
+| `price` | *(WooCommerce product price)* | Override the auto-detected product price |
+| `label` | `Apply for Financing` | CTA button text |
+| `url` | `https://tigongolfcarts.com/apply-for-financing` | CTA button link |
 
 ## Installation
 
 1. Upload the `tigon-finance-calculator` folder to `/wp-content/plugins/`.
 2. Activate the plugin through the **Plugins** menu in WordPress.
 3. Ensure WooCommerce is installed and active.
-4. Use the `[tigon_finance-calculator]` shortcode or the Elementor widget on any product page.
-
-## Shortcode Usage
-
-```
-[tigon_finance-calculator]
-[tigon_finance-calculator price="12999" label="Get Financing" url="https://example.com/apply"]
-```
-
-### Attributes
-
-| Attribute | Default | Description |
-|-----------|---------|-------------|
-| `price` | *(WooCommerce product price)* | Override the auto-detected product price |
-| `label` | `Apply for 0% Financing` | CTA button text |
-| `url` | `https://tigongolfcarts.com/apply-for-financing` | CTA button link |
+4. Use any shortcode or Elementor widget on product pages.
 
 ## License
 

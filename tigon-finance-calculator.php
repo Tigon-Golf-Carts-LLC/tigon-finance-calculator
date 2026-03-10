@@ -45,15 +45,30 @@ function tigon_finance_enqueue_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'tigon_finance_enqueue_assets' );
 
-// Load shortcode.
+// Load shortcode (registers base + all manufacturer shortcodes).
 require_once TIGON_FINANCE_PATH . 'includes/class-shortcode.php';
 
-// Load Elementor widget when Elementor is active.
-function tigon_finance_register_elementor_widget( $widgets_manager ) {
+/**
+ * Register all Elementor widgets when Elementor is active.
+ */
+function tigon_finance_register_elementor_widgets( $widgets_manager ) {
     require_once TIGON_FINANCE_PATH . 'includes/class-elementor-widget.php';
+
+    // Base widget (generic, no manufacturer).
     $widgets_manager->register( new \Tigon_Finance_Elementor_Widget() );
+
+    // Manufacturer-specific widgets.
+    $widgets_manager->register( new \Tigon_Finance_Widget_Denago() );
+    $widgets_manager->register( new \Tigon_Finance_Widget_Evolution() );
+    $widgets_manager->register( new \Tigon_Finance_Widget_Teko() );
+    $widgets_manager->register( new \Tigon_Finance_Widget_Tara() );
+    $widgets_manager->register( new \Tigon_Finance_Widget_Atlas() );
+    $widgets_manager->register( new \Tigon_Finance_Widget_Clubcar() );
+    $widgets_manager->register( new \Tigon_Finance_Widget_Ezgo() );
+    $widgets_manager->register( new \Tigon_Finance_Widget_Swiftev() );
+    $widgets_manager->register( new \Tigon_Finance_Widget_Used() );
 }
-add_action( 'elementor/widgets/register', 'tigon_finance_register_elementor_widget' );
+add_action( 'elementor/widgets/register', 'tigon_finance_register_elementor_widgets' );
 
 // Register an Elementor widget category.
 function tigon_finance_elementor_category( $elements_manager ) {
