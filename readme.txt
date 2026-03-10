@@ -1,6 +1,6 @@
 === TIGON Financing Calculator ===
 Contributors: noahjaslow
-Tags: financing, woocommerce, payments, 0% apr, tigon
+Tags: financing, woocommerce, payments, golf carts, tigon
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 8.1
@@ -12,42 +12,49 @@ The TIGON enterprise WordPress plugin that bridges ZERO Percent Financing Option
 
 == Description ==
 
-TIGON Financing Calculator connects your WooCommerce product catalog with a 0% financing option, displaying real-time monthly payment breakdowns (36, 48, and 60 months) directly on product pages. It works as both a WordPress shortcode and an Elementor widget.
+TIGON Financing Calculator displays two financing options on every WooCommerce product page:
 
-**Features:**
+* **Lowest Payment** — 60 months at 7.99% APR (standard amortized monthly payment)
+* **Best Deal** — 36 months at 0% APR + 5.25% fee (lowest total cost)
 
-* Real-time WooCommerce price sync with automatic monthly payment calculations
-* 0% APR financing display across 36, 48, and 60-month terms
-* Shortcode support: `[tigon_finance-calculator]`
-* Elementor drag-and-drop widget
-* Custom price override option
-* Configurable CTA button text and URL
+Prices sync in real time from WooCommerce product data, including variable product support.
+
+= Manufacturer Widgets =
+
+Dedicated widgets for each brand — available as both WordPress shortcodes and Elementor widgets:
+
+* Denago — `[tigon_finance_denago]`
+* Evolution — `[tigon_finance_evolution]`
+* TEKO — `[tigon_finance_teko]`
+* TARA — `[tigon_finance_tara]`
+* Atlas — `[tigon_finance_atlas]`
+* Club Car — `[tigon_finance_clubcar]`
+* E-Z-GO — `[tigon_finance_ezgo]`
+* Swift EV — `[tigon_finance_swiftev]`
+* Used — `[tigon_finance_used]`
+
+Generic shortcode: `[tigon_finance_calculator]`
+
+= Shortcode Attributes =
+
+* `price` — Override the auto-detected WooCommerce product price.
+* `label` — CTA button text (default: "Apply for Financing").
+* `url` — CTA button link (default: "https://tigongolfcarts.com/apply-for-financing").
 
 == Installation ==
 
 1. Upload the `tigon-finance-calculator` folder to `/wp-content/plugins/`.
 2. Activate the plugin through the **Plugins** menu in WordPress.
 3. Ensure WooCommerce 8.0+ is installed and active.
-4. Use the `[tigon_finance-calculator]` shortcode or the Elementor widget on any product page.
-
-== Shortcode Usage ==
-
-`[tigon_finance-calculator]`
-`[tigon_finance-calculator price="12999" label="Get Financing" url="https://example.com/apply"]`
-
-**Attributes:**
-
-* `price` — Override the auto-detected WooCommerce product price.
-* `label` — CTA button text (default: "Apply for 0% Financing").
-* `url` — CTA button link (default: "https://tigongolfcarts.com/apply-for-financing").
+4. Use any shortcode or Elementor widget on product pages.
 
 == Changelog ==
 
 = 2.0.0 =
-* Rebranded as TIGON Financing Calculator
-* Elementor widget support
-* Shortcode with WooCommerce real-time price sync
-* 36, 48, and 60-month 0% APR payment display
+* Two financing tabs: Lowest Payment (60mo @ 7.99% APR) and Best Deal (36mo 0% + 5.25% fee)
+* Manufacturer-specific widgets: Denago, Evolution, TEKO, TARA, Atlas, Club Car, E-Z-GO, Swift EV, Used
+* Elementor widgets for each manufacturer plus generic calculator
+* Real-time WooCommerce variable product price sync
 
 == License ==
 
