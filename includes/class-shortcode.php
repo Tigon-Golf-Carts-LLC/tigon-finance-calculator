@@ -18,6 +18,7 @@ function tigon_finance_shortcode( $atts ) {
         'label'        => 'Apply for Financing',
         'url'          => 'https://tigongolfcarts.com/apply-for-financing',
         'manufacturer' => '',
+        'best_fee'     => '',
     ), $atts, 'tigon_finance_calculator' );
 
     // Determine price: explicit attribute > current WooCommerce product.
@@ -47,8 +48,8 @@ function tigon_finance_shortcode( $atts ) {
                          / ( pow( 1 + $monthly_rate, $num_payments_low ) - 1 );
     $lowest_total      = $lowest_payment * $num_payments_low;
 
-    // BEST DEAL: 0% for 36 months + 5.25% fee.
-    $fee_rate          = 5.25;
+    // BEST DEAL: 0% for 36 months + fee (default 5.25%, Used = 10%).
+    $fee_rate          = ! empty( $atts['best_fee'] ) ? floatval( $atts['best_fee'] ) : 5.25;
     $num_payments_best = 36;
     $best_total        = $price * ( 1 + $fee_rate / 100 );
     $best_payment      = $best_total / $num_payments_best;
@@ -76,7 +77,8 @@ function tigon_finance_shortcode( $atts ) {
     <div class="<?php echo esc_attr( $box_classes ); ?>"
          data-price="<?php echo esc_attr( $price ); ?>"
          data-apply-url="<?php echo $apply_url; ?>"
-         data-manufacturer="<?php echo esc_attr( $manufacturer ); ?>">
+         data-manufacturer="<?php echo esc_attr( $manufacturer ); ?>"
+         data-best-fee="<?php echo esc_attr( $fee_rate ); ?>">
         <a href="<?php echo $apply_url; ?>" target="_blank" rel="noopener noreferrer" class="tigon-finance-box-link" aria-label="Apply for financing">
         <div class="tigon-finance-header">
             <span class="tigon-finance-header-icon">&#9733;</span>
@@ -151,12 +153,25 @@ function tigon_finance_get_manufacturer_labels() {
  */
 function tigon_finance_register_manufacturer_shortcodes() {
     $manufacturers = tigon_finance_get_manufacturer_labels();
+    $overrides     = tigon_finance_get_manufacturer_overrides();
     foreach ( $manufacturers as $slug => $label ) {
-        add_shortcode( 'tigon_finance_' . $slug, function ( $atts ) use ( $slug ) {
+        add_shortcode( 'tigon_finance_' . $slug, function ( $atts ) use ( $slug, $overrides ) {
             $atts = is_array( $atts ) ? $atts : array();
             $atts['manufacturer'] = $slug;
+            if ( isset( $overrides[ $slug ] ) ) {
+                $atts = array_merge( $atts, $overrides[ $slug ] );
+            }
             return tigon_finance_shortcode( $atts );
         } );
     }
+}
+
+/**
+ * Per-manufacturer attribute overrides.
+ */
+function tigon_finance_get_manufacturer_overrides() {
+    return array(
+        'used' => array( 'best_fee' => '10' ),
+    );
 }
 tigon_finance_register_manufacturer_shortcodes();

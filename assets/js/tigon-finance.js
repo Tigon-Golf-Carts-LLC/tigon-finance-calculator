@@ -6,10 +6,10 @@
     'use strict';
 
     // Finance constants.
-    var LOWEST_MONTHS = 60;
-    var LOWEST_APR    = 7.99;
-    var BEST_MONTHS   = 36;
-    var BEST_FEE_PCT  = 5.25;
+    var LOWEST_MONTHS   = 60;
+    var LOWEST_APR      = 7.99;
+    var BEST_MONTHS     = 36;
+    var BEST_FEE_DEFAULT = 5.25;
 
     function init() {
         var boxes = document.querySelectorAll('.tigon-finance-box');
@@ -93,17 +93,18 @@
             if (lowestDetails) lowestDetails.textContent = 'for ' + LOWEST_MONTHS + ' months \u2022 ' + LOWEST_APR + '% APR \u2022 ' + symbol + numberFormat(lowestTotal.toFixed(2)) + ' total';
         }
 
-        // BEST DEAL panel: 36 months, 0% APR + 5.25% fee.
+        // BEST DEAL panel: 36 months, 0% APR + fee (per-widget override via data-best-fee).
         var bestPanel = box.querySelector('.tigon-finance-panel[data-tab="best"]');
         if (bestPanel) {
-            var bestTotal   = price * (1 + BEST_FEE_PCT / 100);
+            var bestFeePct  = parseFloat(box.getAttribute('data-best-fee')) || BEST_FEE_DEFAULT;
+            var bestTotal   = price * (1 + bestFeePct / 100);
             var bestPayment = bestTotal / BEST_MONTHS;
 
             var bestValue   = bestPanel.querySelector('.tigon-finance-value');
             var bestDetails = bestPanel.querySelector('.tigon-finance-details');
 
             if (bestValue)   bestValue.textContent = numberFormat(bestPayment.toFixed(2));
-            if (bestDetails) bestDetails.textContent = 'for ' + BEST_MONTHS + ' months \u2022 0% APR + ' + BEST_FEE_PCT + '% fee \u2022 ' + symbol + numberFormat(bestTotal.toFixed(2)) + ' total';
+            if (bestDetails) bestDetails.textContent = 'for ' + BEST_MONTHS + ' months \u2022 0% APR + ' + bestFeePct + '% fee \u2022 ' + symbol + numberFormat(bestTotal.toFixed(2)) + ' total';
         }
     }
 
