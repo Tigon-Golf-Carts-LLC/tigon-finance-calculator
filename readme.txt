@@ -1,5 +1,5 @@
 === TIGON Financing Calculator ===
-Contributors: noahjaslow
+Contributor: Noah Jaslow | Jaslow Digital
 Tags: financing, woocommerce, payments, golf carts, tigon
 Requires at least: 6.0
 Tested up to: 6.7
@@ -7,6 +7,7 @@ Requires PHP: 8.1
 Stable tag: 2.0.0
 License: Proprietary
 License URI: https://tigongolfcarts.com
+Contributor URI: https://jaslowdigital.com
 
 The TIGON enterprise WordPress plugin that bridges ZERO Percent Financing Option with WooCommerce — automatically syncing inventory pricing with monthly payments using product data in real time.
 
