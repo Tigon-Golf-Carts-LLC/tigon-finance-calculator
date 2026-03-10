@@ -39,7 +39,7 @@
 /* ---------- Tabs ---------- */
 .tigon-finance-tabs {
     display: flex;
-    background: #c8dff0;
+    background: #034474;
     border-bottom: 2px solid #034474;
 }
 
@@ -62,9 +62,9 @@
 }
 
 .tigon-finance-tab.active {
-    background: #c0392b;
+    background: #af1f31;
     color: #ffffff;
-    border-bottom: 3px solid #a93226;
+    border-bottom: none;
 }
 
 .tigon-finance-tab + .tigon-finance-tab {
