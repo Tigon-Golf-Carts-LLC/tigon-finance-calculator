@@ -58,17 +58,21 @@
 }
 
 .tigon-finance-tab:hover {
-    background: #022d4f;
+    background: #034474;
 }
 
 .tigon-finance-tab.active {
-    background: #af1f31;
+    background: #cc0000;
     color: #ffffff;
     border-bottom: none;
 }
 
+.tigon-finance-tab.active:hover {
+    background: #cc0000;
+}
+
 .tigon-finance-tab + .tigon-finance-tab {
-    border-left: 1px solid #a3c8e0;
+    border-left: 1px solid #034474;
 }
 
 /* ---------- Panels ---------- */
