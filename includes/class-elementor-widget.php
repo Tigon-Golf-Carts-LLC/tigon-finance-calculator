@@ -162,6 +162,7 @@ class Tigon_Finance_Elementor_Widget extends \Elementor\Widget_Base {
             'type'      => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .tigon-finance-tabs' => 'background: {{VALUE}};',
+                '{{WRAPPER}} .tigon-finance-tab:not(.active)' => 'background: {{VALUE}} !important;',
             ],
         ] );
 

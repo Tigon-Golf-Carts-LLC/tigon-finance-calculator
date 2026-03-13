@@ -50,25 +50,32 @@
     font-weight: 600;
     text-align: center;
     cursor: pointer;
-    border: none;
-    background: #0e4671;
-    color: #ffffff;
+    border: none !important;
+    outline: none !important;
+    background: #0e4671 !important;
+    color: #ffffff !important;
     transition: background 0.25s, color 0.25s;
     position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-shadow: none !important;
 }
 
-.tigon-finance-tab:hover {
-    background: #0e4671;
+.tigon-finance-tab:hover,
+.tigon-finance-tab:focus {
+    background: #0e4671 !important;
 }
 
 .tigon-finance-tab.active {
-    background: #af1f31;
-    color: #ffffff;
-    border-bottom: none;
+    background: #af1f31 !important;
+    color: #ffffff !important;
+    border-bottom: none !important;
 }
 
-.tigon-finance-tab.active:hover {
-    background: #af1f31;
+.tigon-finance-tab.active:hover,
+.tigon-finance-tab.active:focus {
+    background: #af1f31 !important;
 }
 
 .tigon-finance-tab + .tigon-finance-tab {
