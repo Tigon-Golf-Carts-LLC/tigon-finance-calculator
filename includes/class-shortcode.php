@@ -131,6 +131,119 @@ add_shortcode( 'tigon_finance_calculator', 'tigon_finance_shortcode' );
 add_shortcode( 'tigon_finance-calculator', 'tigon_finance_shortcode' );
 
 /**
+ * User-driven shortcode: [tigon_user_finance_calculator]
+ *
+ * Renders the same styled box as the standard calculator, but allows the visitor
+ * to enter a custom price and pick a term length (1–7 years, displayed in months).
+ *
+ * Optional attributes:
+ *   price       – initial price prefilled in the input
+ *   term        – initial term in months (12, 24, 36, 48, 60, 72, 84)
+ *   label       – CTA button text (default "Apply for Financing")
+ *   url         – CTA button link (default "https://tigongolfcarts.com/apply-for-financing")
+ *   annual_rate – APR used for amortization (default 7.99)
+ */
+function tigon_user_finance_shortcode( $atts ) {
+    $atts = shortcode_atts( array(
+        'price'       => '',
+        'term'        => 60,
+        'label'       => 'Apply for Financing',
+        'url'         => 'https://tigongolfcarts.com/apply-for-financing',
+        'annual_rate' => 7.99,
+    ), $atts, 'tigon_user_finance_calculator' );
+
+    $initial_price = floatval( $atts['price'] );
+    $annual_rate   = floatval( $atts['annual_rate'] );
+    $term_options  = array( 12, 24, 36, 48, 60, 72, 84 );
+    $initial_term  = intval( $atts['term'] );
+    if ( ! in_array( $initial_term, $term_options, true ) ) {
+        $initial_term = 60;
+    }
+
+    $currency_symbol = function_exists( 'get_woocommerce_currency_symbol' )
+        ? get_woocommerce_currency_symbol()
+        : '$';
+
+    $apply_url = esc_url( $atts['url'] );
+
+    // Initial monthly payment (if a price was supplied).
+    $initial_payment = 0;
+    if ( $initial_price > 0 ) {
+        $monthly_rate    = ( $annual_rate / 100 ) / 12;
+        $initial_payment = ( $initial_price * $monthly_rate * pow( 1 + $monthly_rate, $initial_term ) )
+                           / ( pow( 1 + $monthly_rate, $initial_term ) - 1 );
+    }
+
+    ob_start();
+    ?>
+    <div class="tigon-finance-box tigon-finance-user"
+         data-price="<?php echo esc_attr( $initial_price ); ?>"
+         data-term="<?php echo esc_attr( $initial_term ); ?>"
+         data-annual-rate="<?php echo esc_attr( $annual_rate ); ?>"
+         data-apply-url="<?php echo $apply_url; ?>">
+
+        <div class="tigon-finance-header">
+            <span class="tigon-finance-header-icon">&#9733;</span>
+            <span class="tigon-finance-header-text">Estimate Your Monthly Payment</span>
+        </div>
+
+        <div class="tigon-finance-user-controls">
+            <label class="tigon-finance-user-field">
+                <span class="tigon-finance-user-label">Vehicle Price</span>
+                <span class="tigon-finance-user-input-wrap">
+                    <span class="tigon-finance-user-prefix"><?php echo esc_html( $currency_symbol ); ?></span>
+                    <input type="number"
+                           class="tigon-finance-user-price"
+                           min="0"
+                           step="100"
+                           inputmode="decimal"
+                           placeholder="Enter price"
+                           value="<?php echo $initial_price > 0 ? esc_attr( $initial_price ) : ''; ?>" />
+                </span>
+            </label>
+
+            <label class="tigon-finance-user-field">
+                <span class="tigon-finance-user-label">Term Length</span>
+                <select class="tigon-finance-user-term">
+                    <?php foreach ( $term_options as $months ) :
+                        $years = intval( $months / 12 );
+                        $year_label = 1 === $years ? 'year' : 'years';
+                    ?>
+                        <option value="<?php echo esc_attr( $months ); ?>"
+                            <?php selected( $initial_term, $months ); ?>>
+                            <?php echo esc_html( $months . ' months (' . $years . ' ' . $year_label . ')' ); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </label>
+        </div>
+
+        <div class="tigon-finance-panels">
+            <div class="tigon-finance-panel active" data-tab="user">
+                <p class="tigon-finance-as-low">Estimated Monthly Payment</p>
+                <p class="tigon-finance-amount">
+                    <span class="tigon-finance-currency"><?php echo esc_html( $currency_symbol ); ?></span>
+                    <span class="tigon-finance-value"><?php echo esc_html( number_format( $initial_payment, 2 ) ); ?></span>
+                    <span class="tigon-finance-per">/mo</span>
+                </p>
+                <p class="tigon-finance-details">for <span class="tigon-finance-user-term-label"><?php echo esc_html( $initial_term ); ?></span> months &bull; <?php echo esc_html( number_format( $annual_rate, 2 ) ); ?>% APR</p>
+            </div>
+        </div>
+
+        <a href="<?php echo $apply_url; ?>" target="_blank" rel="noopener noreferrer" class="tigon-finance-cta-link" aria-label="Apply for financing">
+            <span class="tigon-finance-cta">
+                <?php echo esc_html( $atts['label'] ); ?>
+            </span>
+        </a>
+
+        <p class="tigon-finance-disclaimer"><strong>Estimated payment is for illustrative purposes only.</strong> Actual rates and terms are subject to credit approval. Terms, Rates, and Conditions may vary based on the Applicant's credit profile, and lender requirements. Additional fees may apply.</p>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'tigon_user_finance_calculator', 'tigon_user_finance_shortcode' );
+
+/**
  * Return manufacturer display labels keyed by slug.
  */
 function tigon_finance_get_manufacturer_labels() {

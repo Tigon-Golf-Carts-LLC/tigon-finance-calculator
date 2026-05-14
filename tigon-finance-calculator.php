@@ -67,6 +67,9 @@ function tigon_finance_register_elementor_widgets( $widgets_manager ) {
     $widgets_manager->register( new \Tigon_Finance_Widget_Ezgo() );
     $widgets_manager->register( new \Tigon_Finance_Widget_Swiftev() );
     $widgets_manager->register( new \Tigon_Finance_Widget_Used() );
+
+    // User-driven financing calculator.
+    $widgets_manager->register( new \Tigon_Finance_User_Widget() );
 }
 add_action( 'elementor/widgets/register', 'tigon_finance_register_elementor_widgets' );
 
