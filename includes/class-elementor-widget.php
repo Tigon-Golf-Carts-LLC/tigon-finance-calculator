@@ -442,13 +442,13 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
             'type'    => \Elementor\Controls_Manager::SELECT,
             'default' => 60,
             'options' => [
-                12 => '12 months (1 year)',
-                24 => '24 months (2 years)',
-                36 => '36 months (3 years)',
-                48 => '48 months (4 years)',
-                60 => '60 months (5 years)',
-                72 => '72 months (6 years)',
-                84 => '84 months (7 years)',
+                12 => '12 months',
+                24 => '24 months',
+                36 => '36 months',
+                48 => '48 months',
+                60 => '60 months',
+                72 => '72 months',
+                84 => '84 months',
             ],
         ] );
 
