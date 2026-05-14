@@ -141,6 +141,7 @@ add_shortcode( 'tigon_finance-calculator', 'tigon_finance_shortcode' );
  *   term        – initial term in months (12, 24, 36, 48, 60, 72, 84)
  *   label       – CTA button text (default "Apply for Financing")
  *   url         – CTA button link (default "https://tigongolfcarts.com/apply-for-financing")
+ *   header      – header bar text (default "Estimate Your Monthly Payment")
  *   annual_rate – APR used for amortization on the normal financing tab (default 7.99)
  *   best_fee    – % fee added to price on the 0% financing tab (default 5.25)
  */
@@ -152,6 +153,7 @@ function tigon_user_finance_shortcode( $atts ) {
         'url'         => 'https://tigongolfcarts.com/apply-for-financing',
         'annual_rate' => 7.99,
         'best_fee'    => 5.25,
+        'header'      => 'Estimate Your Monthly Payment',
     ), $atts, 'tigon_user_finance_calculator' );
 
     $initial_price = floatval( $atts['price'] );
@@ -190,7 +192,7 @@ function tigon_user_finance_shortcode( $atts ) {
 
         <div class="tigon-finance-header">
             <span class="tigon-finance-header-icon">&#9733;</span>
-            <span class="tigon-finance-header-text">Estimate Your Monthly Payment</span>
+            <span class="tigon-finance-header-text"><?php echo esc_html( $atts['header'] ); ?></span>
         </div>
 
         <div class="tigon-finance-tabs">

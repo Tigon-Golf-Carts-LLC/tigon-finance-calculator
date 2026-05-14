@@ -424,6 +424,12 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ] );
 
+        $this->add_control( 'header_text', [
+            'label'   => __( 'Header Text', 'tigon-finance' ),
+            'type'    => \Elementor\Controls_Manager::TEXT,
+            'default' => 'Estimate Your Monthly Payment',
+        ] );
+
         $this->add_control( 'default_price', [
             'label'       => __( 'Default Price', 'tigon-finance' ),
             'type'        => \Elementor\Controls_Manager::NUMBER,
@@ -541,6 +547,29 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
             'type'      => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .tigon-finance-header' => 'color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'header_size', [
+            'label'      => __( 'Font Size', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'em' ],
+            'range'      => [
+                'px' => [ 'min' => 10, 'max' => 48 ],
+                'em' => [ 'min' => 0.5, 'max' => 4, 'step' => 0.1 ],
+            ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-header'      => 'font-size: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .tigon-finance-header-icon' => 'font-size: calc({{SIZE}}{{UNIT}} + 2px);',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'header_padding', [
+            'label'      => __( 'Padding', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', 'em' ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
         ] );
 
@@ -702,6 +731,10 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
         $settings = $this->get_settings_for_display();
 
         $shortcode_atts = '';
+
+        if ( ! empty( $settings['header_text'] ) ) {
+            $shortcode_atts .= ' header="' . esc_attr( $settings['header_text'] ) . '"';
+        }
 
         if ( ! empty( $settings['default_price'] ) ) {
             $shortcode_atts .= ' price="' . esc_attr( $settings['default_price'] ) . '"';
