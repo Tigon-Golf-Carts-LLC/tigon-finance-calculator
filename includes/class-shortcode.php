@@ -198,7 +198,7 @@ function tigon_user_finance_shortcode( $atts ) {
         </div>
 
         <div class="tigon-finance-tabs">
-            <button class="tigon-finance-tab active" data-tab="normal" type="button">Normal Financing</button>
+            <button class="tigon-finance-tab active" data-tab="normal" type="button">Financing</button>
             <button class="tigon-finance-tab" data-tab="zero" type="button">0% Financing</button>
         </div>
 
