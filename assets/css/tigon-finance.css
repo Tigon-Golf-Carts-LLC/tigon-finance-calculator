@@ -198,6 +198,98 @@
     font-style: italic;
 }
 
+/* ---------- User Calculator Controls ---------- */
+.tigon-finance-user-controls {
+    display: flex;
+    gap: 12px;
+    padding: 18px 20px 4px;
+    flex-wrap: wrap;
+}
+
+.tigon-finance-user-field {
+    flex: 1 1 0;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tigon-finance-user-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #0e4671;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.tigon-finance-user-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 2px solid #0e4671;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tigon-finance-user-prefix {
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0e4671;
+    background: #eaf4fb;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+}
+
+.tigon-finance-user-price {
+    flex: 1;
+    border: none !important;
+    outline: none !important;
+    background: transparent;
+    padding: 10px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0e4671;
+    width: 100%;
+    box-shadow: none !important;
+}
+
+.tigon-finance-user-price::-webkit-outer-spin-button,
+.tigon-finance-user-price::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.tigon-finance-user-price[type=number] {
+    -moz-appearance: textfield;
+}
+
+.tigon-finance-user-term {
+    background: #ffffff;
+    border: 2px solid #0e4671;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0e4671;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='%230e4671' d='M6 8L0 0h12z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 7px;
+    padding-right: 30px;
+}
+
+.tigon-finance-user .tigon-finance-panels {
+    padding-top: 14px;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 600px) {
     .tigon-finance-box {
@@ -252,6 +344,19 @@
     .tigon-finance-disclaimer {
         font-size: 8px;
         padding: 6px 12px;
+    }
+
+    .tigon-finance-user-controls {
+        padding: 14px 14px 2px;
+        gap: 10px;
+    }
+
+    .tigon-finance-user-field {
+        flex: 1 1 100%;
+    }
+
+    .tigon-finance-user-label {
+        font-size: 11px;
     }
 }
 

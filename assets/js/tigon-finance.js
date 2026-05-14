@@ -16,6 +16,11 @@
         if (!boxes.length) return;
 
         boxes.forEach(function (box) {
+            if (box.classList.contains('tigon-finance-user')) {
+                initUserBox(box);
+                return;
+            }
+
             var tabs   = box.querySelectorAll('.tigon-finance-tab');
             var panels = box.querySelectorAll('.tigon-finance-panel');
 
@@ -36,6 +41,53 @@
             // Live-update when WooCommerce variations change the price.
             observePriceChanges(box);
         });
+    }
+
+    /**
+     * Wire up the user-driven calculator: live recalc on price + term changes.
+     */
+    function initUserBox(box) {
+        var priceInput = box.querySelector('.tigon-finance-user-price');
+        var termSelect = box.querySelector('.tigon-finance-user-term');
+        if (!priceInput || !termSelect) return;
+
+        function update() {
+            var price = parseFloat(priceInput.value);
+            var term  = parseInt(termSelect.value, 10);
+            recalcUser(box, price, term);
+        }
+
+        priceInput.addEventListener('input', update);
+        termSelect.addEventListener('change', update);
+    }
+
+    /**
+     * Recalculate the user calculator's monthly payment & detail line.
+     */
+    function recalcUser(box, price, term) {
+        var apr = parseFloat(box.getAttribute('data-annual-rate'));
+        if (isNaN(apr)) apr = 7.99;
+
+        if (!isNaN(term) && term > 0) {
+            box.setAttribute('data-term', term);
+        } else {
+            term = parseInt(box.getAttribute('data-term'), 10) || 60;
+        }
+
+        var valueEl = box.querySelector('.tigon-finance-value');
+        var termLabelEl = box.querySelector('.tigon-finance-user-term-label');
+
+        if (termLabelEl) termLabelEl.textContent = term;
+
+        if (!price || price <= 0 || isNaN(price)) {
+            if (valueEl) valueEl.textContent = '0.00';
+            box.setAttribute('data-price', '');
+            return;
+        }
+
+        box.setAttribute('data-price', price);
+        var payment = calcAmortized(price, apr, term);
+        if (valueEl) valueEl.textContent = numberFormat(payment.toFixed(2));
     }
 
     /**
