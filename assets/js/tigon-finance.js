@@ -44,12 +44,26 @@
     }
 
     /**
-     * Wire up the user-driven calculator: live recalc on price + term changes.
+     * Wire up the user-driven calculator: tab switching + live recalc.
      */
     function initUserBox(box) {
         var priceInput = box.querySelector('.tigon-finance-user-price');
         var termSelect = box.querySelector('.tigon-finance-user-term');
+        var tabs       = box.querySelectorAll('.tigon-finance-tab');
+        var panels     = box.querySelectorAll('.tigon-finance-panel');
+
         if (!priceInput || !termSelect) return;
+
+        tabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                var tabId = this.getAttribute('data-tab');
+                tabs.forEach(function (t) { t.classList.remove('active'); });
+                panels.forEach(function (p) { p.classList.remove('active'); });
+                this.classList.add('active');
+                var target = box.querySelector('.tigon-finance-panel[data-tab="' + tabId + '"]');
+                if (target) target.classList.add('active');
+            });
+        });
 
         function update() {
             var price = parseFloat(priceInput.value);
@@ -62,11 +76,14 @@
     }
 
     /**
-     * Recalculate the user calculator's monthly payment & detail line.
+     * Recalculate both user panels (normal + 0% financing).
      */
     function recalcUser(box, price, term) {
         var apr = parseFloat(box.getAttribute('data-annual-rate'));
         if (isNaN(apr)) apr = 7.99;
+
+        var feePct = parseFloat(box.getAttribute('data-best-fee'));
+        if (isNaN(feePct)) feePct = 5.25;
 
         if (!isNaN(term) && term > 0) {
             box.setAttribute('data-term', term);
@@ -74,20 +91,26 @@
             term = parseInt(box.getAttribute('data-term'), 10) || 60;
         }
 
-        var valueEl = box.querySelector('.tigon-finance-value');
-        var termLabelEl = box.querySelector('.tigon-finance-user-term-label');
+        var termLabels = box.querySelectorAll('.tigon-finance-user-term-label');
+        termLabels.forEach(function (el) { el.textContent = term; });
 
-        if (termLabelEl) termLabelEl.textContent = term;
+        var normalValue = box.querySelector('.tigon-finance-panel[data-tab="normal"] .tigon-finance-value');
+        var zeroValue   = box.querySelector('.tigon-finance-panel[data-tab="zero"] .tigon-finance-value');
 
         if (!price || price <= 0 || isNaN(price)) {
-            if (valueEl) valueEl.textContent = '0.00';
+            if (normalValue) normalValue.textContent = '0.00';
+            if (zeroValue)   zeroValue.textContent   = '0.00';
             box.setAttribute('data-price', '');
             return;
         }
 
         box.setAttribute('data-price', price);
-        var payment = calcAmortized(price, apr, term);
-        if (valueEl) valueEl.textContent = numberFormat(payment.toFixed(2));
+
+        var normalPayment = calcAmortized(price, apr, term);
+        var zeroPayment   = (price * (1 + feePct / 100)) / term;
+
+        if (normalValue) normalValue.textContent = numberFormat(normalPayment.toFixed(2));
+        if (zeroValue)   zeroValue.textContent   = numberFormat(zeroPayment.toFixed(2));
     }
 
     /**
