@@ -424,6 +424,12 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
             'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
         ] );
 
+        $this->add_control( 'header_text', [
+            'label'   => __( 'Header Text', 'tigon-finance' ),
+            'type'    => \Elementor\Controls_Manager::TEXT,
+            'default' => 'Estimate Your Monthly Payment',
+        ] );
+
         $this->add_control( 'default_price', [
             'label'       => __( 'Default Price', 'tigon-finance' ),
             'type'        => \Elementor\Controls_Manager::NUMBER,
@@ -447,11 +453,20 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
         ] );
 
         $this->add_control( 'annual_rate', [
-            'label'       => __( 'Annual Rate (APR %)', 'tigon-finance' ),
+            'label'       => __( 'Normal Financing APR (%)', 'tigon-finance' ),
             'type'        => \Elementor\Controls_Manager::NUMBER,
             'min'         => 0,
             'step'        => 0.01,
             'default'     => 7.99,
+        ] );
+
+        $this->add_control( 'best_fee', [
+            'label'       => __( '0% Financing Fee (%)', 'tigon-finance' ),
+            'type'        => \Elementor\Controls_Manager::NUMBER,
+            'min'         => 0,
+            'step'        => 0.01,
+            'default'     => 5.25,
+            'description' => __( 'Percentage added to the price for the 0% APR option.', 'tigon-finance' ),
         ] );
 
         $this->add_control( 'cta_label', [
@@ -535,9 +550,69 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
             ],
         ] );
 
+        $this->add_responsive_control( 'header_size', [
+            'label'      => __( 'Font Size', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::SLIDER,
+            'size_units' => [ 'px', 'em' ],
+            'range'      => [
+                'px' => [ 'min' => 10, 'max' => 48 ],
+                'em' => [ 'min' => 0.5, 'max' => 4, 'step' => 0.1 ],
+            ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-header'      => 'font-size: {{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .tigon-finance-header-icon' => 'font-size: calc({{SIZE}}{{UNIT}} + 2px);',
+            ],
+        ] );
+
+        $this->add_responsive_control( 'header_padding', [
+            'label'      => __( 'Padding', 'tigon-finance' ),
+            'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px', 'em' ],
+            'selectors'  => [
+                '{{WRAPPER}} .tigon-finance-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ] );
+
         $this->add_group_control( \Elementor\Group_Control_Typography::get_type(), [
             'name'     => 'header_typography',
             'selector' => '{{WRAPPER}} .tigon-finance-header',
+        ] );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section( 'style_tabs', [
+            'label' => __( 'Tabs', 'tigon-finance' ),
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+        ] );
+
+        $this->add_control( 'tabs_bg_color', [
+            'label'     => __( 'Background Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-tabs' => 'background: {{VALUE}};',
+                '{{WRAPPER}} .tigon-finance-tab:not(.active)' => 'background: {{VALUE}} !important;',
+            ],
+        ] );
+
+        $this->add_control( 'tabs_text_color', [
+            'label'     => __( 'Text Color', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-tab' => 'color: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_control( 'tabs_active_bg_color', [
+            'label'     => __( 'Active Tab Background', 'tigon-finance' ),
+            'type'      => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tigon-finance-tab.active' => 'background: {{VALUE}};',
+            ],
+        ] );
+
+        $this->add_group_control( \Elementor\Group_Control_Typography::get_type(), [
+            'name'     => 'tabs_typography',
+            'selector' => '{{WRAPPER}} .tigon-finance-tab',
         ] );
 
         $this->end_controls_section();
@@ -657,6 +732,10 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
 
         $shortcode_atts = '';
 
+        if ( ! empty( $settings['header_text'] ) ) {
+            $shortcode_atts .= ' header="' . esc_attr( $settings['header_text'] ) . '"';
+        }
+
         if ( ! empty( $settings['default_price'] ) ) {
             $shortcode_atts .= ' price="' . esc_attr( $settings['default_price'] ) . '"';
         }
@@ -667,6 +746,10 @@ class Tigon_Finance_User_Widget extends \Elementor\Widget_Base {
 
         if ( isset( $settings['annual_rate'] ) && '' !== $settings['annual_rate'] ) {
             $shortcode_atts .= ' annual_rate="' . esc_attr( $settings['annual_rate'] ) . '"';
+        }
+
+        if ( isset( $settings['best_fee'] ) && '' !== $settings['best_fee'] ) {
+            $shortcode_atts .= ' best_fee="' . esc_attr( $settings['best_fee'] ) . '"';
         }
 
         if ( ! empty( $settings['cta_label'] ) ) {
