@@ -198,7 +198,7 @@ function tigon_user_finance_shortcode( $atts ) {
         </div>
 
         <div class="tigon-finance-tabs">
-            <button class="tigon-finance-tab active" data-tab="normal" type="button">Normal Financing</button>
+            <button class="tigon-finance-tab active" data-tab="normal" type="button">Financing</button>
             <button class="tigon-finance-tab" data-tab="zero" type="button">0% Financing</button>
         </div>
 
@@ -217,13 +217,10 @@ function tigon_user_finance_shortcode( $atts ) {
             <label class="tigon-finance-user-field">
                 <span class="tigon-finance-user-label">Term Length</span>
                 <select class="tigon-finance-user-input tigon-finance-user-term">
-                    <?php foreach ( $term_options as $months ) :
-                        $years = intval( $months / 12 );
-                        $year_label = 1 === $years ? 'year' : 'years';
-                    ?>
+                    <?php foreach ( $term_options as $months ) : ?>
                         <option value="<?php echo esc_attr( $months ); ?>"
                             <?php selected( $initial_term, $months ); ?>>
-                            <?php echo esc_html( $months . ' months (' . $years . ' ' . $year_label . ')' ); ?>
+                            <?php echo esc_html( $months . ' months' ); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
