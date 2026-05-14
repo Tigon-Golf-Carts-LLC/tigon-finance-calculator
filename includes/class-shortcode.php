@@ -83,6 +83,7 @@ function tigon_finance_shortcode( $atts ) {
         <div class="tigon-finance-header">
             <span class="tigon-finance-header-icon">&#9733;</span>
             <span class="tigon-finance-header-text">0% Financing Available</span>
+            <span class="tigon-finance-header-icon tigon-finance-header-icon-after">&#9733;</span>
         </div>
 
         <div class="tigon-finance-tabs">
@@ -193,6 +194,7 @@ function tigon_user_finance_shortcode( $atts ) {
         <div class="tigon-finance-header">
             <span class="tigon-finance-header-icon">&#9733;</span>
             <span class="tigon-finance-header-text"><?php echo esc_html( $atts['header'] ); ?></span>
+            <span class="tigon-finance-header-icon tigon-finance-header-icon-after">&#9733;</span>
         </div>
 
         <div class="tigon-finance-tabs">

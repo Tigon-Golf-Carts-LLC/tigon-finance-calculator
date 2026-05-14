@@ -36,6 +36,11 @@
     font-size: 20px;
 }
 
+.tigon-finance-header-icon-after {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
 /* ---------- Tabs ---------- */
 .tigon-finance-tabs {
     display: flex;
