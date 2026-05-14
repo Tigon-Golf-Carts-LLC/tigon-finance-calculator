@@ -44,47 +44,31 @@
     }
 
     /**
-     * Wire up the user-driven calculator: tab switching + live recalc.
+     * Run any initial setup that's box-local for the user calculator.
+     * All actual event wiring is done globally via delegation (see below)
+     * so dynamically rendered widgets (Elementor editor preview, AJAX, etc.)
+     * still work without re-binding.
      */
     function initUserBox(box) {
-        var priceInput = box.querySelector('.tigon-finance-user-price');
-        var termSelect = box.querySelector('.tigon-finance-user-term');
-        var calcButton = box.querySelector('.tigon-finance-calculate');
-        var tabs       = box.querySelectorAll('.tigon-finance-tab');
-        var panels     = box.querySelectorAll('.tigon-finance-panel');
-
-        if (!priceInput || !termSelect) return;
-
-        tabs.forEach(function (tab) {
-            tab.addEventListener('click', function () {
-                var tabId = this.getAttribute('data-tab');
-                tabs.forEach(function (t) { t.classList.remove('active'); });
-                panels.forEach(function (p) { p.classList.remove('active'); });
-                this.classList.add('active');
-                var target = box.querySelector('.tigon-finance-panel[data-tab="' + tabId + '"]');
-                if (target) target.classList.add('active');
-            });
-        });
-
-        function update() {
-            var price = parseFloat(priceInput.value);
-            var term  = parseInt(termSelect.value, 10);
-            recalcUser(box, price, term);
-        }
-
-        priceInput.addEventListener('input', update);
-        termSelect.addEventListener('change', update);
-
-        if (calcButton) {
-            calcButton.addEventListener('click', function (e) {
-                e.preventDefault();
-                update();
-            });
-        }
+        // Set initial state from current input values.
+        recalcFromBox(box);
     }
 
     /**
-     * Recalculate both user panels (normal + 0% financing).
+     * Read the current input + select values out of a user box and recalc.
+     */
+    function recalcFromBox(box) {
+        var priceInput = box.querySelector('.tigon-finance-user-price');
+        var termSelect = box.querySelector('.tigon-finance-user-term');
+        if (!priceInput || !termSelect) return;
+
+        var price = parseFloat(priceInput.value);
+        var term  = parseInt(termSelect.value, 10);
+        recalcUser(box, price, term);
+    }
+
+    /**
+     * Recalculate both user panels (financing + 0% financing).
      */
     function recalcUser(box, price, term) {
         var apr = parseFloat(box.getAttribute('data-annual-rate'));
@@ -119,6 +103,56 @@
 
         if (normalValue) normalValue.textContent = numberFormat(normalPayment.toFixed(2));
         if (zeroValue)   zeroValue.textContent   = numberFormat(zeroPayment.toFixed(2));
+    }
+
+    /**
+     * Global delegated handlers so the user calculator works no matter when
+     * its DOM appears (initial render, Elementor preview, AJAX swap, etc).
+     */
+    function bindDelegatedHandlers() {
+        document.addEventListener('input', function (e) {
+            var target = e.target;
+            if (!target || !target.classList) return;
+            if (target.classList.contains('tigon-finance-user-price')) {
+                var box = target.closest('.tigon-finance-box.tigon-finance-user');
+                if (box) recalcFromBox(box);
+            }
+        });
+
+        document.addEventListener('change', function (e) {
+            var target = e.target;
+            if (!target || !target.classList) return;
+            if (target.classList.contains('tigon-finance-user-term') ||
+                target.classList.contains('tigon-finance-user-price')) {
+                var box = target.closest('.tigon-finance-box.tigon-finance-user');
+                if (box) recalcFromBox(box);
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            var target = e.target;
+            if (!target || !target.closest) return;
+
+            var calcBtn = target.closest('.tigon-finance-calculate');
+            if (calcBtn) {
+                e.preventDefault();
+                var userBox = calcBtn.closest('.tigon-finance-box.tigon-finance-user');
+                if (userBox) recalcFromBox(userBox);
+                return;
+            }
+
+            var tab = target.closest('.tigon-finance-tab');
+            if (tab) {
+                var tabBox = tab.closest('.tigon-finance-box');
+                if (!tabBox) return;
+                var tabId = tab.getAttribute('data-tab');
+                tabBox.querySelectorAll('.tigon-finance-tab').forEach(function (t) { t.classList.remove('active'); });
+                tabBox.querySelectorAll('.tigon-finance-panel').forEach(function (p) { p.classList.remove('active'); });
+                tab.classList.add('active');
+                var panel = tabBox.querySelector('.tigon-finance-panel[data-tab="' + tabId + '"]');
+                if (panel) panel.classList.add('active');
+            }
+        });
     }
 
     /**
@@ -198,6 +232,8 @@
     }
 
     // Boot up.
+    bindDelegatedHandlers();
+
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
