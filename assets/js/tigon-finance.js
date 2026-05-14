@@ -49,6 +49,7 @@
     function initUserBox(box) {
         var priceInput = box.querySelector('.tigon-finance-user-price');
         var termSelect = box.querySelector('.tigon-finance-user-term');
+        var calcButton = box.querySelector('.tigon-finance-calculate');
         var tabs       = box.querySelectorAll('.tigon-finance-tab');
         var panels     = box.querySelectorAll('.tigon-finance-panel');
 
@@ -73,6 +74,13 @@
 
         priceInput.addEventListener('input', update);
         termSelect.addEventListener('change', update);
+
+        if (calcButton) {
+            calcButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                update();
+            });
+        }
     }
 
     /**

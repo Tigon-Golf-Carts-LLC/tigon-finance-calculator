@@ -209,6 +209,7 @@
     gap: 12px;
     padding: 18px 20px 4px;
     flex-wrap: wrap;
+    align-items: stretch;
 }
 
 .tigon-finance-user-field {
@@ -227,72 +228,87 @@
     margin-bottom: 6px;
 }
 
-.tigon-finance-user-input-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    border: 2px solid #0e4671;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.tigon-finance-user-prefix {
-    padding: 0 10px;
-    font-size: 16px;
-    font-weight: 700;
-    color: #0e4671;
-    background: #eaf4fb;
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-}
-
-.tigon-finance-user-price {
-    flex: 1;
-    border: none !important;
-    outline: none !important;
-    background: transparent;
-    padding: 10px 12px;
+.tigon-finance-user .tigon-finance-user-input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    margin: 0;
+    background: #ffffff !important;
+    border: 2px solid #0e4671 !important;
+    border-radius: 8px !important;
+    padding: 0 12px;
+    font-family: inherit;
     font-size: 16px;
     font-weight: 600;
-    color: #0e4671;
-    width: 100%;
+    color: #0e4671 !important;
+    line-height: 1.2;
+    outline: none !important;
     box-shadow: none !important;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.tigon-finance-user-price::-webkit-outer-spin-button,
-.tigon-finance-user-price::-webkit-inner-spin-button {
+.tigon-finance-user .tigon-finance-user-input:focus,
+.tigon-finance-user .tigon-finance-user-input:hover {
+    border-color: #af1f31 !important;
+    box-shadow: 0 0 0 3px rgba(175, 31, 49, 0.15) !important;
+}
+
+.tigon-finance-user .tigon-finance-user-price::-webkit-outer-spin-button,
+.tigon-finance-user .tigon-finance-user-price::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.tigon-finance-user-price[type=number] {
+.tigon-finance-user .tigon-finance-user-price[type=number] {
     -moz-appearance: textfield;
 }
 
-.tigon-finance-user-term {
-    background: #ffffff;
-    border: 2px solid #0e4671;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 15px;
-    font-weight: 600;
-    color: #0e4671;
-    outline: none;
-    cursor: pointer;
+.tigon-finance-user .tigon-finance-user-term {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='%230e4671' d='M6 8L0 0h12z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 10px 7px;
-    padding-right: 30px;
+    cursor: pointer;
+    padding-right: 32px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'><path fill='%230e4671' d='M6 8L0 0h12z'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 10px 7px !important;
 }
 
 .tigon-finance-user .tigon-finance-panels {
     padding-top: 14px;
+}
+
+/* ---------- Calculate Button ---------- */
+.tigon-finance-calculate {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 0 20px 10px;
+    padding: 12px 20px;
+    background: #0e4671;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none !important;
+    box-shadow: 0 3px 10px rgba(14, 70, 113, 0.25);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.tigon-finance-calculate:hover,
+.tigon-finance-calculate:focus {
+    background: #1a5d8f;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(14, 70, 113, 0.35);
+}
+
+.tigon-finance-calculate:active {
+    transform: translateY(0);
 }
 
 /* ---------- Responsive ---------- */
@@ -362,6 +378,13 @@
 
     .tigon-finance-user-label {
         font-size: 11px;
+    }
+
+    .tigon-finance-calculate {
+        width: calc(100% - 28px);
+        margin: 0 14px 8px;
+        font-size: 13px;
+        padding: 10px 16px;
     }
 }
 

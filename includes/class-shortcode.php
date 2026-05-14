@@ -205,21 +205,18 @@ function tigon_user_finance_shortcode( $atts ) {
         <div class="tigon-finance-user-controls">
             <label class="tigon-finance-user-field">
                 <span class="tigon-finance-user-label">Vehicle Price</span>
-                <span class="tigon-finance-user-input-wrap">
-                    <span class="tigon-finance-user-prefix"><?php echo esc_html( $currency_symbol ); ?></span>
-                    <input type="number"
-                           class="tigon-finance-user-price"
-                           min="0"
-                           step="100"
-                           inputmode="decimal"
-                           placeholder="Enter price"
-                           value="<?php echo $initial_price > 0 ? esc_attr( $initial_price ) : ''; ?>" />
-                </span>
+                <input type="number"
+                       class="tigon-finance-user-input tigon-finance-user-price"
+                       min="0"
+                       step="100"
+                       inputmode="decimal"
+                       placeholder="<?php echo esc_attr( $currency_symbol ); ?> Enter price"
+                       value="<?php echo $initial_price > 0 ? esc_attr( $initial_price ) : ''; ?>" />
             </label>
 
             <label class="tigon-finance-user-field">
                 <span class="tigon-finance-user-label">Term Length</span>
-                <select class="tigon-finance-user-term">
+                <select class="tigon-finance-user-input tigon-finance-user-term">
                     <?php foreach ( $term_options as $months ) :
                         $years = intval( $months / 12 );
                         $year_label = 1 === $years ? 'year' : 'years';
@@ -254,6 +251,8 @@ function tigon_user_finance_shortcode( $atts ) {
                 <p class="tigon-finance-details">for <span class="tigon-finance-user-term-label"><?php echo esc_html( $initial_term ); ?></span> months &bull; 0% APR</p>
             </div>
         </div>
+
+        <button type="button" class="tigon-finance-calculate">Calculate Price</button>
 
         <a href="<?php echo $apply_url; ?>" target="_blank" rel="noopener noreferrer" class="tigon-finance-cta-link" aria-label="Apply for financing">
             <span class="tigon-finance-cta">
